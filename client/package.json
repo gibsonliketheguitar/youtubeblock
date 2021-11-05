@@ -8,14 +8,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react": "17.0.33",
+    "@types/react-native": "^0.66.2",
     "jotai": "^1.4.2",
     "next": "12.0.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-native-web": "^0.17.5"
   },
   "devDependencies": {
     "@types/node": "16.11.6",
-    "@types/react": "17.0.33",
+    "@types/react-native-web": "npm:@types/react-native@^0.66.2",
     "autoprefixer": "^10.4.0",
     "eslint": "7",
     "eslint-config-next": "12.0.2",
