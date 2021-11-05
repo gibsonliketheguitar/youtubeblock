@@ -1,12 +1,16 @@
-import React from "react"
-import { Props } from '@ts/types/Props'
+import React from "react";
+//constant and types
+import { Props } from "@ts/types/Props";
+//components
+import TopNav from "@components/topnav/TopNav";
 
-function AppLayout(props: Props) {
-    return (
-        <div className='flex flex-col h-screen'>
-            {props.children}
-        </div>
-    )
+function AppLayout({ children }: Props) {
+  return (
+    <div className="flex flex-col h-screen">
+      <TopNav />
+      {children}
+    </div>
+  );
 }
 
-export default AppLayout
+export default AppLayout;

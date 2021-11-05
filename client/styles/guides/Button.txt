@@ -1,0 +1,12 @@
+https://uxmovement.com/mobile/optimal-size-and-spacing-for-mobile-buttons/
+Button between 42px - 72px optimal for mobile size
+42px - low  priority
+60px - med  priority
+72px - high priority
+
+https://uxdesign.cc/design-better-buttons-a5c90a113280
+Button Anatomy
+
+
+MIT Touch Lab
+https://www.kalamuna.com/news/3-simple-tips-ux-button-design
