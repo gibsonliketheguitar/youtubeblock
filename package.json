@@ -1,13 +1,1 @@
-{   
-    "license": "MIT",
-    "version": "0.0.1",
-    "private": true, 
-    "dependencies": {
-        "concurrently": "^6.3.0"
-    },
-    "scripts": {
-        "install": "concurrently \"cd client && yarn install\"  \"cd server and yarn install\" ",
-        "reset:dev": "npx kill-port 3000 && npx kill-port 3001 && yarn start:dev",
-        "start:dev": "concurrently \"cd client && yarn dev\" \"cd server && npm run start:dev\" "
-    }
-}
+{"license":"MIT","version":"0.0.1","private":true,"dependencies":{"concurrently":"^6.3.0","next-themes":"^0.0.15"},"scripts":{"install":"concurrently \"cd client && yarn install\"  \"cd server and yarn install\" ","reset:dev":"npx kill-port 3000 && npx kill-port 3001 && yarn start:dev","start:dev":"concurrently \"cd client && yarn dev\" \"cd server && npm run start:dev\" "}}
