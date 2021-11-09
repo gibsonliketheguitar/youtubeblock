@@ -1,22 +1,23 @@
 import { Switch } from "react-native";
+import { useTheme } from "next-themes";
 import { useSwitchScale } from "./darkModeHelper";
-//store
-import useDarkMode from "@store/useDarkMode";
+import { DARK, LIGHT } from "@utils/constants";
 
 function DarkModeSwitch() {
-  const { darkMode, setDarkMode } = useDarkMode();
+  const { theme, setTheme } = useTheme()
   const switchScale = useSwitchScale();
 
   return (
     <div className="m-2 sm:m-10">
       <Switch
-        //thumbColor={"#fad6a5"}
-        //trackColor={"#464646"}
-        value={darkMode}
-        style={{
-          transform: [{ scaleX: switchScale.X }, { scaleY: switchScale.Y }],
+        thumbColor={"#ffd966"}
+        trackColor={{
+          false: "#ff876f",
+          true: "#939393"
         }}
-        onValueChange={(value: Boolean) => setDarkMode(value)}
+        value={theme === LIGHT ? false : true}
+        style={{ transform: [{ scaleX: switchScale.X }, { scaleY: switchScale.Y }] }}
+        onValueChange={() => setTheme(theme === LIGHT ? DARK : LIGHT)}
       />
     </div>
   );
