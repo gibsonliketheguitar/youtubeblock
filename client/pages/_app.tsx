@@ -1,13 +1,16 @@
-import 'tailwindcss/tailwind.css'
-import type { AppProps } from 'next/app'
-import AppLayout from '@layout/AppLayout'
+import "tailwindcss/tailwind.css";
+import type { AppProps } from "next/app";
+import AppLayout from "@layout/AppLayout";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <AppLayout>
-      <Component {...pageProps} />
-    </AppLayout>
-  )
+    <SessionProvider session={session}>
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
+    </SessionProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

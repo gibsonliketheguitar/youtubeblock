@@ -12,7 +12,6 @@ function DarkModeSwitch() {
       <Switch
         //thumbColor={"#fad6a5"}
         //trackColor={"#464646"}
-        value={darkMode}
         style={{
           transform: [{ scaleX: switchScale.X }, { scaleY: switchScale.Y }],
         }}
