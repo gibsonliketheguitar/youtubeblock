@@ -5,20 +5,24 @@ const baseURL = 'http://localhost:3001'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await getSession({ req })
 
-    if (session) {
+    try {
+        if (!session) throw 'Error'
+
         let response = await fetch(baseURL + '/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(session.user)
+            body: JSON.stringify(session?.user)
         })
-        let result = await response.json()
 
-        if (result?.error) res.send({ message: result.message, error: result.error })
-        else res.send({ 'test': 'sign up' })
+        if (response.ok) res.status(201).send({ message: 'Sign Up Succesful' })
+        else throw 'Error'
     }
-    else {
-        res.send({ message: 'Failed to sign up account', error: 'Unauthorized' })
+    catch (error) {
+        res.status(401).send({ message: 'Failed to create account', error: 'Unauthorized' })
+    }
+    finally {
+        res.end()
     }
 }
