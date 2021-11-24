@@ -16,7 +16,7 @@ function DarkModeSwitch() {
           true: "#939393"
         }}
         value={theme === LIGHT ? false : true}
-        style={{ transform: [{ scaleX: switchScale.X }, { scaleY: switchScale.Y }] }}
+        //style={{ transform: [{ scaleX: switchScale.X }, { scaleY: switchScale.Y }] }}
         onValueChange={() => setTheme(theme === LIGHT ? DARK : LIGHT)}
       />
     </div>
