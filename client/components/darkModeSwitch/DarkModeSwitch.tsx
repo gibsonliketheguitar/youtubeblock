@@ -8,7 +8,7 @@ function DarkModeSwitch() {
   const switchScale = useSwitchScale();
 
   return (
-    <div className="m-2 sm:m-10">
+    <div className="flex flex-col justify-center items-center mr-4: sm:mr-8">
       <Switch
         thumbColor={"#ffd966"}
         trackColor={{
@@ -16,7 +16,7 @@ function DarkModeSwitch() {
           true: "#939393"
         }}
         value={theme === LIGHT ? false : true}
-        //style={{ transform: [{ scaleX: switchScale.X }, { scaleY: switchScale.Y }] }}
+        style={{ transform: [{ scaleX: switchScale.X }, { scaleY: switchScale.Y }] }}
         onValueChange={() => setTheme(theme === LIGHT ? DARK : LIGHT)}
       />
     </div>
