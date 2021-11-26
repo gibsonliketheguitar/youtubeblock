@@ -15,8 +15,11 @@ export default function SignIn() {
         async function signIn() {
             try {
                 const res = await fetch('/api/auth/signin')
+                console.log('ok client', res)
                 if (!res.ok) throw (await res.json().then(data => data.message))
-                else routeTo('/')
+                else {
+                    routeTo('/settings')
+                }
             }
             catch (error: string | any) {
                 setMessage(error)

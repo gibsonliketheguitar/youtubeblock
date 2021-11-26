@@ -6,10 +6,7 @@ const baseURL = 'http://localhost:3001'
 const secret = process.env.JWT_SECRET!
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-    //todo implementation of accessToken
-    const token = await getToken({ req, secret })
     const session = await getSession({ req })
-
     try {
         if (!session) throw 'Error'
 
@@ -21,8 +18,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             body: JSON.stringify(session?.user)
         })
 
-        if (response.ok) res.status(200).send({ message: 'Login successful' })
-        else throw 'Error'
+        if (response.ok) {
+            let { accessToken } = await response.json()
+            res.status(200).send({ message: 'Login successful', accessToken })
+        }
+        else {
+            throw 'Error'
+        }
     }
     catch (error) {
         res.status(401).send({ message: 'Failed to login. Please check your credentials', error: 'Unauthorized' })
