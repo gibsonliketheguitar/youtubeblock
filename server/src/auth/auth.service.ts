@@ -9,7 +9,7 @@ export class AuthService {
         private userRepository: UserRepository,
     ) { }
 
-    async signIn(signInDto) {
+    async signIn(signInDto): Promise<void> {
         const { email } = signInDto
         const user = await this.userRepository.findOne({ username: email })
         if (user) {
@@ -20,7 +20,7 @@ export class AuthService {
         }
     }
 
-    async signUp(signUpDto) {
+    async signUp(signUpDto): Promise<void> {
         return this.userRepository.createUser(signUpDto)
     }
 }
