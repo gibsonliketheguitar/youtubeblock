@@ -1,13 +1,24 @@
+import useGlobalAlertMessage from '@utils/hooks/useGlobalAlertMessage'
+import useSetRoute from '@utils/hooks/useSetRoute'
 import { useSession, signIn } from 'next-auth/react'
 import { useEffect } from 'react'
 
-function SignUp() {
+export default function SignUp() {
     const { data: session } = useSession()
+    const { routeTo } = useSetRoute()
+    const { setMessage } = useGlobalAlertMessage()
 
     useEffect(() => {
+        if (!session) return
         async function signUp() {
-            const res = await fetch('/api/auth/signup')
-            const result = await res.json()
+            try {
+                const res = await fetch('/api/auth/signup')
+                if (!res.ok) throw (await res.json().then(data => data.message))
+                else routeTo('/')
+            }
+            catch (error: string | any) {
+                setMessage(error)
+            }
         }
         signUp()
     }, [session])
@@ -15,8 +26,8 @@ function SignUp() {
     return (
         <div className='flex-grow flex flex-col justify-center items-center'>
             <button onClick={() => signIn('google')}> Sign Up </button>
+            <br />
+            <button onClick={() => routeTo('/auth/signin')}> Sign in with existing Account</button>
         </div>
     )
 }
-
-export default SignUp

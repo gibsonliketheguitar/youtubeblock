@@ -1,20 +1,19 @@
+import useSetRoute from "@utils/hooks/useSetRoute"
 import { signOut, useSession } from "next-auth/react"
-import { useRouter } from "next/dist/client/router"
 
 function Account() {
     const { data: session } = useSession()
-    const router = useRouter()
-    const options = {
-        callbackUrl: '/',
-        redirect: true,
-    }
+    const { routeTo } = useSetRoute()
+
+    const handleSignOut = () => signOut({ callbackUrl: '/', redirect: true, })
+
     if (!session) {
-        router.push('/')
+        routeTo('/')
         return <></>
     }
     return (
         <div className='flex-grow flex flex-col items-center justify-center'>
-            <button onClick={() => signOut(options)}> SignOut</button>
+            <button onClick={handleSignOut}> SignOut</button>
         </div>
     )
 }
