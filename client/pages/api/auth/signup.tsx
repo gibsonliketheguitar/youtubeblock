@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await getSession({ req })
 
     try {
-        if (!session) throw 'Error'
+        if (!session) throw 'Failed to create account'
 
         let response = await fetch(baseURL + '/auth/signup', {
             method: 'POST',
@@ -16,11 +16,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             body: JSON.stringify(session?.user)
         })
 
-        if (response.ok) res.status(201).send({ message: 'Sign Up Succesful' })
-        else throw 'Error'
+        if (!response.ok) {
+            console.log('what is response', response)
+            throw await response.json().then(data => data.message)
+        }
+        else {
+            res.status(201).send({ message: 'Sign Up Succesful' })
+        }
     }
-    catch (error) {
-        res.status(401).send({ message: 'Failed to create account', error: 'Unauthorized' })
+    catch (error: string | any) {
+        res.status(401).send({ message: error, error: 'Unauthorized' })
     }
     finally {
         res.end()
