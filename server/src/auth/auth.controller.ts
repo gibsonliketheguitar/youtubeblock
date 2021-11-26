@@ -10,13 +10,13 @@ export class AuthController {
 
     @Post('/signin')
     @HttpCode(200)
-    signIn(@Body() authCredDto: AuthCredentialDto): Promise<void> {
+    signIn(@Body() authCredDto: AuthCredentialDto): Promise<{ accessToken: string }> {
         return this.authService.signIn(authCredDto)
     }
 
     @Post('/signup')
     @HttpCode(201)
-    signUp(@Body() authCredDto: AuthCredentialDto): Promise<void> {
+    signUp(@Body() authCredDto: AuthCredentialDto): Promise<{ accessToken: string }> {
         return this.authService.signUp(authCredDto)
     }
 }
