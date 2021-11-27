@@ -3,23 +3,21 @@ import { useSession, signIn, getSession } from 'next-auth/react'
 import { useEffect } from 'react'
 //helper
 import useGlobalAlertMessage from '@utils/hooks/useGlobalAlertMessage'
+import executeAfter from '@utils/executeAfter'
 import useSetRoute from '@utils/hooks/useSetRoute'
 
 export default function SignIn() {
     const { data: session } = useSession()
-    const { setMessage } = useGlobalAlertMessage()
     const { routeTo } = useSetRoute()
+    const { setMessage } = useGlobalAlertMessage()
 
     useEffect(() => {
         if (!session) return
         async function signIn() {
             try {
                 const res = await fetch('/api/auth/signin')
-                console.log('ok client', res)
                 if (!res.ok) throw (await res.json().then(data => data.message))
-                else {
-                    routeTo('/settings')
-                }
+                else executeAfter(routeTo('/primetime'), 3)
             }
             catch (error: string | any) {
                 setMessage(error)
