@@ -17,7 +17,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         })
 
         if (!response.ok) {
-            console.log('what is response', response)
             throw await response.json().then(data => data.message)
         }
         else {

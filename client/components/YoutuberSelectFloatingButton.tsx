@@ -31,7 +31,6 @@ export default function YoutuberSelectFloatingButton({ type, disable, pageToken 
         [PREV]: <AiFillCaretLeft />,
         [NEXT]: <AiFillCaretRight />
     }
-    console.log(type)
 
     return (
         <span onClick={() => handleOnClick()}>

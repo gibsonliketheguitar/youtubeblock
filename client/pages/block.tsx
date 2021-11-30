@@ -12,9 +12,6 @@ export default function Block() {
         const data = await getSubscriptions()
         setCurrYtList(data)
     }
-    useEffect(() => {
-        console.log(currYtList)
-    }, [currYtList])
 
     return (
         <div className='flex-grow flex flex-col items-center justify-center'>
