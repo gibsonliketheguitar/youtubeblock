@@ -11,7 +11,7 @@ module.exports = {
   */
   reactStrictMode: true,
   images: {
-    domains: ['yt3.ggpht.com'],
+    domains: ['yt3.ggpht.com', 'i.picsum.photos'],
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {

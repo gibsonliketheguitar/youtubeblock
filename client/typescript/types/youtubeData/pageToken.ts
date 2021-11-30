@@ -1,0 +1,1 @@
+export type PageToken = string | ""

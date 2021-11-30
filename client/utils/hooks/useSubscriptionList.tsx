@@ -1,7 +1,7 @@
-import { subscriptionAtom } from "@store/atom";
+import { currYtListAtom } from "@store/atom";
 import { useAtom } from "jotai";
 
-export default function useSubscriptionList() {
-    const [subscriptions, setSubscriptions] = useAtom(subscriptionAtom)
-    return { subscriptions, setSubscriptions }
+export default function useCurrYtList() {
+    const [currYtList, setCurrYtList] = useAtom(currYtListAtom)
+    return { currYtList, setCurrYtList }
 }
