@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Button from "@components/common/Button";
-import YoutubeClient from "@components/YoutubeDataClient";
-import { default as SelectList } from "@components/YoutuberSelectList";
+import { default as YtClient } from "@components/YoutubeDataClient";
+import { default as YtSelectList } from "@components/YoutuberSelectList";
 import useSubscriptionList from "@utils/hooks/useSubscriptionList";
 import getSubscriptions from "@utils/youtubeSubscriptionHelpers";
+import MySelectionList from "@components/MySelectionList";
 
 export default function Block() {
     const { currYtList, setCurrYtList } = useSubscriptionList()
@@ -13,14 +14,15 @@ export default function Block() {
         setCurrYtList(data)
     }
 
+    useEffect(() => {
+        console.log(currYtList)
+    }, currYtList)
+
     return (
         <div className='flex-grow flex flex-col items-center justify-center'>
-            <SelectList
-                items={currYtList?.items}
-                prevPageToken={currYtList?.prevPageToken}
-                nextPageToken={currYtList?.nextPageToken}
-            />
-            <YoutubeClient />
+            <MySelectionList />
+            <YtClient />
+            <YtSelectList {...currYtList} />
             <Button handleOnClick={handleLoad}>Load Subsriptions</Button>
         </div>
     )
