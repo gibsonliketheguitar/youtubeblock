@@ -16,12 +16,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             body: JSON.stringify(session?.user)
         })
 
-        if (response.ok) {
-            res.status(201).send({ message: 'Sign Up Succesful' })
-        }
-        else {
-            throw await response.json().then(data => data.message)
-        }
+        if (response.ok) res.status(201).send({ message: 'Sign Up Succesful' })
+        else throw (await response.json().then(data => data.message))
     }
     catch (error: string | any) {
         res.status(401).send({ message: error, error: 'Unauthorized' })

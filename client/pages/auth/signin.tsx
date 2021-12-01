@@ -4,11 +4,13 @@ import { useEffect } from 'react'
 //helper
 import useGlobalAlertMessage from '@utils/hooks/useGlobalAlertMessage'
 import executeAfter from '@utils/executeAfter'
+import useAccessToken from '@utils/hooks/useAccessToken'
 import useSetRoute from '@utils/hooks/useSetRoute'
 
 export default function SignIn() {
     const { data: session } = useSession()
     const { routeTo } = useSetRoute()
+    const { setAccessToken } = useAccessToken()
     const { setMessage } = useGlobalAlertMessage()
 
     useEffect(() => {
@@ -16,8 +18,14 @@ export default function SignIn() {
         async function signIn() {
             try {
                 const res = await fetch('/api/auth/signin')
-                if (res.ok) executeAfter(routeTo('/primetime'), 3)
-                else throw (await res.json().then(data => data.message))
+                const result = await res.json()
+                if (res.ok) {
+                    setAccessToken(result.accessToken)
+                    executeAfter(routeTo('/primetime'), 3)
+                }
+                else {
+                    throw result.message
+                }
             }
             catch (error: string | any) {
                 setMessage(error)

@@ -14,7 +14,7 @@ export default function SignUp() {
         async function signUp() {
             try {
                 const res = await fetch('/api/auth/signup')
-                if (res.ok) executeAfter(routeTo('/primetime'), 3)
+                if (res.ok) executeAfter(routeTo('/signin'), 3)
                 else throw (await res.json().then(data => data.message))
             }
             catch (error: string | any) {
