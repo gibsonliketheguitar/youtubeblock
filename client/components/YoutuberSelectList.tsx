@@ -1,17 +1,17 @@
 import { default as SelectIcon } from "@components/YoutuberSelectIcon"
 import { default as FloatingButton } from '@components/YoutuberSelectFloatingButton'
-import { YoutubeSelectList } from "@ts/interface/ytSelectList"
 import { NEXT, PREV } from "@utils/constants"
 import useThumbnailSize from "@utils/hooks/useThumbnailSize"
 import isArrEmpty from "@utils/isArrEmpty"
 import isStrEmpty from "@utils/isStringEmpty"
-import useMySelection from "@utils/hooks/useMySelection"
-import { useEffect } from "react"
+import useSubscriptionList from "@utils/hooks/useSubscriptionList"
 
-export default function YoutuberSelectList({ items, prevPageToken, nextPageToken }: YoutubeSelectList) {
-    let { size } = useThumbnailSize()
+export default function YoutuberSelectList() {
+    const { currYtList } = useSubscriptionList()
+    const { size } = useThumbnailSize()
+
+    const { items, prevPageToken, nextPageToken } = currYtList
     if (isArrEmpty(items)) return <></>
-
     return (
         <div className="flex flex-row flex-wrap justify-start">
             <FloatingButton type={PREV} disable={isStrEmpty(prevPageToken)} pageToken={prevPageToken} />

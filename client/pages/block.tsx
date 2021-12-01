@@ -7,22 +7,18 @@ import getSubscriptions from "@utils/youtubeSubscriptionHelpers";
 import MySelectionList from "@components/MySelectionList";
 
 export default function Block() {
-    const { currYtList, setCurrYtList } = useSubscriptionList()
+    const { setCurrYtList } = useSubscriptionList()
 
     async function handleLoad() {
         const data = await getSubscriptions()
         setCurrYtList(data)
     }
 
-    useEffect(() => {
-        console.log(currYtList)
-    }, currYtList)
-
     return (
         <div className='flex-grow flex flex-col items-center justify-center'>
             <MySelectionList />
             <YtClient />
-            <YtSelectList {...currYtList} />
+            <YtSelectList />
             <Button handleOnClick={handleLoad}>Load Subsriptions</Button>
         </div>
     )
