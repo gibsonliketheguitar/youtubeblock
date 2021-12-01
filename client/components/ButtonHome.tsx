@@ -1,10 +1,12 @@
-import { useRouter } from 'next/dist/client/router'
 import { AiFillHome } from 'react-icons/ai'
 import Icon from '@components/common/Icon'
+import { useSession } from 'next-auth/react'
+import useSetRoute from '@utils/hooks/useSetRoute'
 
-function ButtonHome() {
-    const router = useRouter()
-    const handleGoHome = () => router.push('/')
+export default function ButtonHome() {
+    const { routeTo } = useSetRoute()
+    const { data: session } = useSession()
+    const handleGoHome = () => (session?.user) ? routeTo('/primetime') : routeTo('/')
 
     return (
         <div className='flex flex-col justify-centers items-center'>
@@ -12,5 +14,3 @@ function ButtonHome() {
         </div>
     )
 }
-
-export default ButtonHome

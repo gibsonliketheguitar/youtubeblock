@@ -16,7 +16,7 @@ export class AuthController {
 
     @Post('/signup')
     @HttpCode(201)
-    signUp(@Body() authCredDto: AuthCredentialDto): Promise<{ accessToken: string }> {
+    signUp(@Body() authCredDto: AuthCredentialDto): Promise<void> {
         return this.authService.signUp(authCredDto)
     }
 }

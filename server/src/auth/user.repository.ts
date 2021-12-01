@@ -7,7 +7,7 @@ import { AuthCredentialDto } from './dto/auth-credential.dto';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-    async createUser(authCredDto: AuthCredentialDto): Promise<{ username: string }> {
+    async createUser(authCredDto: AuthCredentialDto): Promise<void> {
         const { name, email } = authCredDto
         const password: any = email + await randomBytes(32).toString('hex')
         const hashPassword = await argon2.hash(password);
@@ -15,8 +15,7 @@ export class UserRepository extends Repository<User> {
         const user = this.create({ name, username: email, password: hashPassword });
 
         try {
-            await this.save(user)
-            return { username: email }
+            await this.save(user);
         } catch (error) {
             if (error.code === '23505') {
                 throw new ConflictException('Username already exist')

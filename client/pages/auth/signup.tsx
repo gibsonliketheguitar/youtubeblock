@@ -1,5 +1,6 @@
 import useGlobalAlertMessage from '@utils/hooks/useGlobalAlertMessage'
 import useSetRoute from '@utils/hooks/useSetRoute'
+import executeAfter from '@utils/executeAfter'
 import { useSession, signIn } from 'next-auth/react'
 import { useEffect } from 'react'
 
@@ -13,8 +14,8 @@ export default function SignUp() {
         async function signUp() {
             try {
                 const res = await fetch('/api/auth/signup')
-                if (!res.ok) throw (await res.json().then(data => data.message))
-                else routeTo('/')
+                if (res.ok) executeAfter(routeTo('/signin'), 3)
+                else throw (await res.json().then(data => data.message))
             }
             catch (error: string | any) {
                 setMessage(error)
