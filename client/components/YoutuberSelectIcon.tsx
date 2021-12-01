@@ -2,9 +2,6 @@ import Image from 'next/image'
 import { default as IconInterface } from "@ts/interface/ytSelectIcon";
 import { LG, MD, SM } from '@utils/constants';
 import useMySelection from '@utils/hooks/useMySelection';
-import isArrNotEmpty from '@utils/isArrNotEmpty';
-import { channel } from 'diagnostics_channel';
-import MySelection from '@ts/interface/mySelection';
 import isSelectedFrom from '@utils/isSelectedFrom';
 
 export default function YoutuberSelectIcon({

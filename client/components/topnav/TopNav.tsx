@@ -6,13 +6,12 @@ import { default as SignIn } from "@components/ButtonSignIn";
 
 function TopNav() {
   const { data: session } = useSession()
-
   const position = 'flex flex-row justify-between'
   const style = ''
   return (
     <nav className={`${position} ${style}`}>
       <Home />
-      {/*<Switch />*/}
+      <Switch />
       {!session ? <SignIn /> : <Account />}
     </nav>
   );

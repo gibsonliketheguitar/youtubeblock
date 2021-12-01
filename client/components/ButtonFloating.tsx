@@ -1,7 +1,7 @@
-import useSetRoute from '@utils/hooks/useSetRoute'
 import { HiViewGridAdd } from 'react-icons/hi'
+import useSetRoute from '@utils/hooks/useSetRoute'
 
-function FloatingButton(props: any) {
+function FloatingButton() {
     const scale = 'transform scale-100'
     const position = 'flex flex-col fixed bottom-3 right-3 z-50 items-center justify-center'
     const height = 'h-12'

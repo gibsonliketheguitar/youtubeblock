@@ -15,7 +15,6 @@ export default function GlobalAlertModal() {
 
     useEffect(() => {
         if (message === undefined) return
-
         const hasMessage = Boolean(message?.length > 0)
         if (hasMessage) setShowModal(true)
     }, [message])

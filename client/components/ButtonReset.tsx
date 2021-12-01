@@ -2,7 +2,7 @@ import useMySelection from '@utils/hooks/useMySelection'
 import isArrEmpty from '@utils/isArrEmpty'
 import { HiOutlineTrash } from 'react-icons/hi'
 
-function ButtonReset() {
+export default function ButtonReset() {
     const { mySelectionList, reset } = useMySelection()
     const scale = 'transform scale-90'
     const position = 'flex justify-center items-center ml-1'
@@ -20,5 +20,3 @@ function ButtonReset() {
         </div>
     )
 }
-
-export default ButtonReset

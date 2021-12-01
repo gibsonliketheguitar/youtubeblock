@@ -34,8 +34,8 @@ async function loadClient() {
 
 async function authenticate() {
     try {
-        await gapi.auth2.getAuthInstance().signIn({ scope: "https://www.googleapis.com/auth/youtube.readonly" })
-        console.log("Sign-in successful");
+        let auth = await gapi.auth2.getAuthInstance().signIn({ scope: "https://www.googleapis.com/auth/youtube.readonly" })
+        console.log("Sign-in successful", auth);
     }
     catch (error) {
         console.error("Error signing in", error)
