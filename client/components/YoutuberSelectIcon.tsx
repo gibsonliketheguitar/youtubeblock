@@ -3,6 +3,9 @@ import { default as IconInterface } from "@ts/interface/ytSelectIcon";
 import { LG, MD, SM } from '@utils/constants';
 import useMySelection from '@utils/hooks/useMySelection';
 import isArrNotEmpty from '@utils/isArrNotEmpty';
+import { channel } from 'diagnostics_channel';
+import MySelection from '@ts/interface/mySelection';
+import isSelectedFrom from '@utils/isSelectedFrom';
 
 export default function YoutuberSelectIcon({
     description,
@@ -23,13 +26,16 @@ export default function YoutuberSelectIcon({
         [LG]: thumbnails.high.url,
     }
 
+    const channelId = resourceId.channelId
+    const isSelected = isSelectedFrom(channelId, mySelectionList)
+
     function handleOnClick() {
-        if (isSelected()) {
-            remove(resourceId.channelId)
+        if (isSelected) {
+            remove(channelId)
         }
         else {
             select({
-                channelId: resourceId.channelId,
+                channelId,
                 description,
                 title,
                 url: urlTable[SM],
@@ -38,22 +44,15 @@ export default function YoutuberSelectIcon({
         }
     }
 
-    function isSelected() {
-        const selected = mySelectionList.filter((item: any) => {
-            return item.channelId === resourceId.channelId && item.selected === true
-        })
-        return (isArrNotEmpty(selected)) ? true : false
-    }
-
     return (
         <div className="relative w-24 h-24 bg-gray-200" onClick={() => handleOnClick()}>
             <Image
                 src={urlTable[thumbnailSize]}
-                alt={title + `youtube channel id: ${resourceId.channelId} + description: ${description}`}
+                alt={title + `youtube channel id: ${channelId} + description: ${description}`}
                 width={100}
                 height={100}
             />
-            <div className={`absolute inset-0 ${isSelected() ? selectedStyle : normalStyle}`}>
+            <div className={`absolute inset-0 ${isSelected ? selectedStyle : normalStyle}`}>
                 <div className="flex items-center justify-center h-full text-sm text-bold text-center">
                     {title}
                 </div>
