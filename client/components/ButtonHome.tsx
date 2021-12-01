@@ -3,7 +3,7 @@ import Icon from '@components/common/Icon'
 import { useSession } from 'next-auth/react'
 import useSetRoute from '@utils/hooks/useSetRoute'
 
-export function ButtonHome() {
+export default function ButtonHome() {
     const { routeTo } = useSetRoute()
     const { data: session } = useSession()
     const handleGoHome = () => (session?.user) ? routeTo('/primetime') : routeTo('/')

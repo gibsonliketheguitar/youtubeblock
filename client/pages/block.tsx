@@ -4,9 +4,11 @@ import { default as YtSelectList } from "@components/YoutuberSelectList";
 import useSubscriptionList from "@utils/hooks/useSubscriptionList";
 import getSubscriptions from "@utils/youtubeSubscriptionHelpers";
 import MySelectionList from "@components/MySelectionList";
+import useSetRoute from "@utils/hooks/useSetRoute";
 
 export default function Block() {
     const { setCurrYtList } = useSubscriptionList()
+    const { routeTo } = useSetRoute()
 
     async function handleLoad() {
         const data = await getSubscriptions()
@@ -14,7 +16,7 @@ export default function Block() {
     }
 
     function handleSave() {
-
+        routeTo('/save')
     }
 
     return (
