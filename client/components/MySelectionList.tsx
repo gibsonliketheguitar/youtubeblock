@@ -1,6 +1,5 @@
 import { default as ResetBtn } from '@components/ButtonReset'
 import useMySelection from "@utils/hooks/useMySelection"
-import { useEffect } from 'react'
 import MySelectionIcon from './MySelectionIcon'
 
 export default function MySelectionList() {

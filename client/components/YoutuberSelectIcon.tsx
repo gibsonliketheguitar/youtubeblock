@@ -3,15 +3,21 @@ import { default as IconInterface } from "@ts/interface/ytSelectIcon";
 import { LG, MD, SM } from '@utils/constants';
 import useMySelection from '@utils/hooks/useMySelection';
 import isArrNotEmpty from '@utils/isArrNotEmpty';
+import MySelection from '@ts/interface/mySelection';
+import { channel } from 'diagnostics_channel';
 
 export default function YoutuberSelectIcon({
     description,
+    handleOnClick,
+    isSelected,
     resourceId,
     title,
     thumbnails,
     thumbnailSize,
+
+
 }: IconInterface) {
-    const { mySelectionList, remove, select } = useMySelection() // see if use Memo helps reduce the rendering because right now this is declared on all Icons
+    const { mySelectionList } = useMySelection()
     const initStyle = "opacity-0"
     const hoverStyle = "hover:opacity-100 hover:bg-gray-400 hover:bg-opacity-50"
     const normalStyle = `${initStyle} ${hoverStyle}`
@@ -23,37 +29,25 @@ export default function YoutuberSelectIcon({
         [LG]: thumbnails.high.url,
     }
 
-    function handleOnClick() {
-        if (isSelected()) {
-            remove(resourceId.channelId)
-        }
-        else {
-            select({
-                channelId: resourceId.channelId,
-                description,
-                title,
-                url: urlTable[SM],
-                selected: true
-            })
-        }
+    const data: MySelection = {
+        channelId: resourceId.channelId,
+        description,
+        title,
+        url: urlTable[SM],
+        selected: true
     }
 
-    function isSelected() {
-        const selected = mySelectionList.filter((item: any) => {
-            return item.channelId === resourceId.channelId && item.selected === true
-        })
-        return (isArrNotEmpty(selected)) ? true : false
-    }
+    const ytChannelId = resourceId.channelId
 
     return (
-        <div className="relative w-24 h-24 bg-gray-200" onClick={() => handleOnClick()}>
+        <div className="relative w-24 h-24 bg-gray-200" onClick={() => handleOnClick(ytChannelId, data)}>
             <Image
                 src={urlTable[thumbnailSize]}
-                alt={title + `youtube channel id: ${resourceId.channelId} + description: ${description}`}
+                alt={title + `youtube channel id: ${ytChannelId} + description: ${description}`}
                 width={100}
                 height={100}
             />
-            <div className={`absolute inset-0 ${isSelected() ? selectedStyle : normalStyle}`}>
+            <div className={`absolute inset-0 ${isSelected(ytChannelId, mySelectionList) ? selectedStyle : normalStyle}`}>
                 <div className="flex items-center justify-center h-full text-sm text-bold text-center">
                     {title}
                 </div>
