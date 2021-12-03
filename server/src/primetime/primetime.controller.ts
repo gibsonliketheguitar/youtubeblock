@@ -26,11 +26,8 @@ export class PrimeTimeController {
     createPrimeTime(
         @Body() createPrimeTimeDto: CreatePrimeTimeDto,
         @getUser() user: User
-    ): Promise<any> {
-        console.log('what is this', createPrimeTimeDto, user)
-        let test = this.primeTimeService.createPrimeTime(createPrimeTimeDto, user)
-        console.log('what is test', test)
-        return test
+    ): Promise<{ blockId: string }> {
+        return this.primeTimeService.createPrimeTime(createPrimeTimeDto, user)
     }
 
     @Get()

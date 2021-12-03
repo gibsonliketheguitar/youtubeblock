@@ -26,7 +26,7 @@ export class PrimeTimeService {
         return found
     }
 
-    async createPrimeTime(createPrimeTimeDto: CreatePrimeTimeDto, user: User): Promise<any> {
+    async createPrimeTime(createPrimeTimeDto: CreatePrimeTimeDto, user: User): Promise<{ blockId: string }> {
         return this.primetimeRepository.createPrimeTime(createPrimeTimeDto, user)
     }
 

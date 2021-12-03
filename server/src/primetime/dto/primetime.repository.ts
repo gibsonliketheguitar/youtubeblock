@@ -1,3 +1,4 @@
+import { ConsoleLogger } from "@nestjs/common";
 import { User } from "src/auth/user.entity";
 import { EntityRepository, Repository } from "typeorm";
 import { CreatePrimeTimeDto, GetPrimeTimesFilterDto, UpdatePrimeTimeDto } from "../primetime.dto";
@@ -13,28 +14,13 @@ export class PrimeTimeRepository extends Repository<PrimeTime | any>{
         return primetimes
     }
 
-    async createPrimeTime(createPrimeTimeDto: CreatePrimeTimeDto, user: User) {
-        const {
-            title,
-            description,
-            rank,
-            subscriptions,
-            shared,
-            tags,
-        } = createPrimeTimeDto
-
+    async createPrimeTime(createPrimeTimeDto: CreatePrimeTimeDto, user: User): Promise<{ blockId: string }> {
         const primeTime = this.create({
-            title,
-            description,
-            rank,
-            subscriptions,
-            shared,
-            tags,
-            user
+            ...createPrimeTimeDto,
+            ...user
         });
-
-        await this.save(primeTime)
-        return primeTime
+        const { id } = await this.save(primeTime)
+        return { blockId: id }
     }
 
     async updatePrimeTime(updatePrimeTimeDto: UpdatePrimeTimeDto) {
