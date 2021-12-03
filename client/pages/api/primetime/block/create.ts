@@ -3,6 +3,7 @@ import { getSession } from "next-auth/react";
 
 const baseURL = 'http://localhost:3001'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    console.log('hello')
     const session = await getSession({ req })
     const { accessToken, subscriptions } = req.body
     const payload = {
@@ -26,6 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             body: JSON.stringify(payload)
         })
         const result = await response.json()
+        console.log('what is result', result)
         if (response.ok) res.status(201).send({ blockId: result.blockId })
         else throw result.message
     }

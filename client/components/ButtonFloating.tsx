@@ -14,7 +14,7 @@ function FloatingButton() {
     return (
         <div
             className={`${scale} ${position} ${shape} ${color} ${hover}`}
-            onClick={() => routeTo('/block')}
+            onClick={() => routeTo('/primetime/block')}
         >
             <HiViewGridAdd />
         </div>

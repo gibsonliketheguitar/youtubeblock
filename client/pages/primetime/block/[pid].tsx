@@ -10,7 +10,9 @@ export default function PrimeTimeBlock() {
 
     useEffect(() => {
         async function getPageData() {
-            const res = await fetch(`/api/primetime/${pid}/accessToken?=${accessToken}`)
+            const baseUrl = `/api/primetime/block/${pid}`
+            console.log('what is basedUrl', baseUrl)
+            const res = await fetch(baseUrl)
             const result: any = await res.json()
             console.log(result)
         }
