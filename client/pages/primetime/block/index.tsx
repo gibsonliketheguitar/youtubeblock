@@ -38,7 +38,6 @@ export default function Block() {
                 body: JSON.stringify(payload),
             })
             const result = await res.json()
-
             if (res.ok) routeTo(`/primetime/block/${result.blockId}`)
             else throw result.message
         }

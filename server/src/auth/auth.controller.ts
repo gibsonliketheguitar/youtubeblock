@@ -20,10 +20,4 @@ export class AuthController {
     signUp(@Body() authCredDto: AuthCredentialDto): Promise<void> {
         return this.authService.signUp(authCredDto)
     }
-
-    @Post('/test')
-    @UseGuards(AuthGuard())
-    test(@Req() req,) {
-        console.log(req)
-    }
 }

@@ -9,6 +9,7 @@ import {
     Query,
     UseGuards,
     HttpCode,
+    Req,
 } from '@nestjs/common';
 
 import { PrimeTimeService } from './primetime.service';
@@ -17,6 +18,7 @@ import { CreatePrimeTimeDto, GetPrimeTimesFilterDto, UpdatePrimeTimeDto } from '
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/auth/user.entity';
 import { getUser } from 'src/auth/get-user.decorator';
+import { PrimeTime } from './dto/primetime.entity';
 
 @Controller('primetime')
 @UseGuards(AuthGuard())
@@ -42,7 +44,8 @@ export class PrimeTimeController {
     getPrimeTimeById(
         @Param('id') id: string,
         @getUser() user: User,
-    ): Promise<any> {
+    ): Promise<PrimeTime> {
+        console.log('what is id', id, user)
         return this.primeTimeService.getPrimeTimeBy(id, user)
     }
 
