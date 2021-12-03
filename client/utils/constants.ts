@@ -7,3 +7,7 @@ export const NEXT = 'next'
 export const SM = 'small'
 export const MD = 'medium'
 export const LG = 'large'
+
+export const GET = 'get'
+export const DELETE = 'delete'
+export const PUT = 'put'

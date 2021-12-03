@@ -1,11 +1,10 @@
 import { Pressable } from 'react-native'
-import router from 'next/router'
 import { default as BlockIcon } from '@components/PrimeTimePreviewBlockIcon'
-import { useEffect } from 'react'
+import { default as PTPreviewBlock } from '@ts/interface/primeTimePreviewBlock'
 import useSetRoute from '@utils/hooks/useSetRoute'
 //components
 
-export default function PrimeTimePreviewBlock({ subscriptions, id }: any) {
+export default function PrimeTimePreviewBlock({ subscriptions, id }: PTPreviewBlock) {
     const { routeTo } = useSetRoute()
 
     function handlePress(e: any) {
@@ -19,7 +18,7 @@ export default function PrimeTimePreviewBlock({ subscriptions, id }: any) {
             onLongPress={(e) => { }}
         >
             <div className="flex flex-row" >
-                {subscriptions.map((item: any, index: number) => {
+                {subscriptions?.map((item: any, index: number) => {
                     return (
                         <BlockIcon
                             key={index + '_' + item.title}

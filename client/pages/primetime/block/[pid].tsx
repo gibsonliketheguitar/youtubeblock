@@ -14,13 +14,15 @@ export default function PrimeTimeBlock() {
             const baseUrl = `/api/primetime/block/${pid}?accessToken=${accessToken}`
             const res = await fetch(baseUrl)
             const result: any = await res.json()
-            console.log('block result', result)
-        }
 
+            console.log(result)
+        }
         getPageData()
     }, [pid])
 
-    return <div>
-        Hello World: {pid}
-    </div>
+    return (
+        <div className='flex-grow flex flex-col justify-items items-center'>
+
+        </div>
+    )
 }

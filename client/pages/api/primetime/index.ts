@@ -3,9 +3,10 @@ import { getSession } from "next-auth/react";
 
 const baseURL = 'http://localhost:3001'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    const session = await getSession({ req })
     const { accessToken } = req.query
-    console.log(req.query)
     try {
+        if (!session) throw 'Invalid Credentials'
         let response = await fetch('http://localhost:3001/primetime', {
             method: 'GET',
             headers: {

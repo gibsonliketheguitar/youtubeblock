@@ -27,7 +27,7 @@ export default function Block() {
             subscriptions: mySelectionList
         }
         try {
-            const res = await fetch('/api/primetime/block/create', {
+            const res = await fetch('/api/primetime/block', {
                 method: 'POST',
                 headers: {
                     'Access-Control-Allow-Origin': 'http://localhost:3000',

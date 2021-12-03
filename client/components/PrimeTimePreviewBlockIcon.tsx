@@ -1,7 +1,12 @@
 import Image from 'next/image'
+import { default as PTPreviewBlockIcon } from '@ts/interface/primeTimePreviewBlockIcon'
 
-export default function PrimeTimePreviewBlockIcon(props: any) {
-    const { channelId, description, url, title } = props
+export default function PrimeTimePreviewBlockIcon({
+    channelId,
+    description,
+    url, title
+}: PTPreviewBlockIcon
+) {
     return (
         <Image
             src={url}

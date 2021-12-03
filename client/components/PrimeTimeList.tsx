@@ -1,26 +1,23 @@
 import Carousel from '@components/common/Carousel'
-import isArrEmpty from '@utils/isArrEmpty'
 import { default as PreviewBlock } from '@components/PrimeTimePreviewBlock'
+import PrimeTimeList from '@ts/interface/primeTimeList'
+import isArrEmpty from '@utils/isArrEmpty'
 
-function PrimeTimeList(props: any) {
-    if (isArrEmpty(props.data)) return <></>
+export default function PrimeTimeList({ data }: PrimeTimeList) {
+    if (isArrEmpty(data)) return <></>
     return (
         <div className="flex flex-col">
-            {props.data.map((item: any, indx: number) => {
-                const { id, subscriptions } = item
+            {data?.map((item: any, indx: number) => {
                 return (
                     <Carousel key={indx}>
                         <PreviewBlock
                             key={indx}
-                            id={id}
-                            subscriptions={subscriptions}
+                            id={item.id}
+                            subscriptions={item.subscriptions}
                         />
                     </Carousel>
                 )
-            })
-            }
+            })}
         </div>
     )
 }
-
-export default PrimeTimeList
