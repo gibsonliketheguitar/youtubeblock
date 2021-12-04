@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { PrimeTime } from 'src/primetime/dto/primetime.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -11,6 +12,9 @@ export class User {
     @Column({ unique: true })
     username: string;
 
-    @Column()
+    @Column({ select: false })
     password: string;
+
+    @OneToMany(_type => PrimeTime, (primetime) => primetime.user, { eager: true })
+    primetimes: PrimeTime[];
 }

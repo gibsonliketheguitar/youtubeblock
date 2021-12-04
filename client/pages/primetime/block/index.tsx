@@ -27,7 +27,7 @@ export default function Block() {
             subscriptions: mySelectionList
         }
         try {
-            const res = await fetch('api/primetime', {
+            const res = await fetch('/api/primetime/block', {
                 method: 'POST',
                 headers: {
                     'Access-Control-Allow-Origin': 'http://localhost:3000',
@@ -37,10 +37,9 @@ export default function Block() {
                 },
                 body: JSON.stringify(payload),
             })
-            if (res.ok) {
-                console.log('hi')
-            }
-            else throw (await res.json().then(data => data.message))
+            const result = await res.json()
+            if (res.ok) routeTo(`/primetime/block/${result.blockId}`)
+            else throw result.message
         }
         catch (error: any) {
             setMessage(error)
