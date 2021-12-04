@@ -1,12 +1,12 @@
+import { PID } from '@ts/types/PID'
 import useAccessToken from '@utils/hooks/useAccessToken'
-import { NextPageContext } from 'next'
-import { useRouter } from 'next/router'
+import usePID from '@utils/hooks/usePid'
+
 import { useEffect } from 'react'
 
 export default function PrimeTimeBlock() {
-    const router = useRouter()
     const { accessToken } = useAccessToken()
-    const { pid } = router.query
+    const { pid }: any = usePID()
 
     useEffect(() => {
         async function getPageData() {
