@@ -10,6 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const method = req?.method || 'none'
 
     const createBlock = async () => {
+        console.log('create block')
         const payload = {
             title: 'None',
             description: 'None',
@@ -43,11 +44,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }
     }
 
-    const apiTable: any = {
-        [GET]: createBlock,
-        [DELETE]: 'delete',
-        [PUT]: 'put',
+    async function deleteBlock() {
+        console.log('delete block')
+    }
+    async function updateBlock() {
+        console.log('update block')
     }
 
-    await apiTable[method]
+    if (req.method === 'POST') {
+        createBlock()
+    }
+    else if (req.method === PUT) {
+        updateBlock()
+    }
+    else if (req.method === DELETE) {
+        deleteBlock()
+    }
+    else {
+        res.end()
+    }
 }

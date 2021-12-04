@@ -4,6 +4,7 @@ import { getSession } from "next-auth/react";
 
 const baseURL = ''
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    console.log('what is res method', req.method)
     const { accessToken, pid } = req.query
     const Url = baseURL + `http://localhost:3001/primetime/${pid}`
     try {
@@ -16,8 +17,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             }
         })
         const result = await response.json()
+        console.log('what is result', result)
         if (response.ok) {
-            res.status(201).send({ block: result })
+            res.status(201).send({ data: result })
         }
         else {
             throw result.message
